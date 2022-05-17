@@ -66,7 +66,7 @@ export default function Home() {
          value={func}
          onChange={(e)=> setFunc(e.target.value)}
         />
-        {console.log(result)}
+        {console.log(timeComplexity)}
         <br />
         <button type="submit">Generate Time Complexity</button>
         <div>The time complexity of this function is {timeComplexity}</div>
