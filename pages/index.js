@@ -59,9 +59,11 @@ export default function Home() {
       </form>
       <h3>type the function</h3>
       <form onSubmit={submitFunction}>
-        <input
+        <textarea
          type="text" 
          name='func'
+         rows="4" 
+         cols="50"
          placeholder='Enter anything'
          value={func}
          onChange={(e)=> setFunc(e.target.value)}
