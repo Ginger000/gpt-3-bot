@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [input, setInput] = useState("")
-  const [result, setResult] = useState()
+  const [result, setResult] = useState("")
   const [func, setFunc] = useState("")
   const [timeComplexity, setTimeComplexity] = useState()
 
@@ -24,6 +24,8 @@ export default function Home() {
     
     setInput("")
   }
+
+
   async function submitFunction(event) {
     event.preventDefault()
     const response = await fetch("/api/timeComplexity", {
@@ -34,9 +36,9 @@ export default function Home() {
       body:JSON.stringify({func:func})
     })
     const data = await response.json()
-    setResult(data.result)
+    setTimeComplexity(data.timeComplexity)
     
-    setInput("")
+    setFunc("")
   }
 
   return (
@@ -50,24 +52,24 @@ export default function Home() {
          value={input}
          onChange={(e)=> setInput(e.target.value)}
         />
-        {console.log(result)}
+        {console.log(timeComplexity)}
         <br />
         <button type="submit">Generate Output</button>
         <div ></div>
       </form>
       <h3>type the function</h3>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={submitFunction}>
         <input
          type="text" 
-         name='input'
+         name='func'
          placeholder='Enter anything'
-         value={input}
-         onChange={(e)=> setInput(e.target.value)}
+         value={func}
+         onChange={(e)=> setFunc(e.target.value)}
         />
         {console.log(result)}
         <br />
         <button type="submit">Generate Time Complexity</button>
-        <div ></div>
+        <div>The time complexity of this function is {timeComplexity}</div>
       </form>
 
     </main>
