@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useContext, useRef } from "react";
-import Bubble from './shared/bubble';
+import Bubble from './shared/Bubble';
 import TypingAnimation from './shared/TypingAnimation';
 import ChatContext from '../context/ChatContext';
 
