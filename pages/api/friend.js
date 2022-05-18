@@ -1,6 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import { Configuration, OpenAIApi } from "openai";
+// import { useContext } from "react";
+// import ChatContext from "../../context/ChatContext";
 
 const configuration = new Configuration({
   apiKey:process.env.OPENAI_API_KEY
@@ -8,7 +10,8 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 export default async function (req, res){
-  const completion = await openai.createCompletion("text-curie-001", {
+  // const {engine} = useContext(ChatContext)
+  const completion = await openai.createCompletion(req.body.engine, {
     prompt:generatePrompt(req.body.myword),
     temperature:0.5,
     max_tokens:60,
