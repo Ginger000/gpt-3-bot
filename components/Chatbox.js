@@ -17,7 +17,7 @@ function Chatbox() {
   }, [conversation])
 
   return (
-    <div  className='h-96 bg-zinc-100/20  text-white font-bold font-mono drop-shadow-2xl rounded overflow-y-scroll flex flex-col'>
+    <div  className='h-[500px] md:h-96 w-screen md:w-[600px] md:bg-zinc-100/20  text-white font-bold font-mono drop-shadow-2xl rounded overflow-y-scroll flex flex-col'>
        
 
         {

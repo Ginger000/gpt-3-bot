@@ -6,39 +6,40 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 function UserInputBox() {
     const [myword, setMyword] = useState('');
-    const [gptword, setGptword] = useState("")
-    
-    const { engine,addConversation, setIsLoading, isLoading } = useContext(ChatContext);
+    const [gptword, setGptword] = useState('');
 
-    useEffect(()=>{
-      const newGptword = {
-        speaker:"gpt",
-        content:gptword,
-        timestamp:Date.now()
-      }
-      console.log(isLoading)
-      setTimeout(()=>{
-        setIsLoading(false)
-        addConversation(newGptword)
-      }, 1500)
-      //addConversation(newGptword)
-  }, [gptword])
+    const { engine, addConversation, setIsLoading, isLoading } =
+        useContext(ChatContext);
+
+    useEffect(() => {
+        const newGptword = {
+            speaker: 'gpt',
+            content: gptword,
+            timestamp: Date.now(),
+        };
+        console.log(isLoading);
+        setTimeout(() => {
+            setIsLoading(false);
+            addConversation(newGptword);
+        }, 1500);
+        //addConversation(newGptword)
+    }, [gptword]);
 
     const handleEnterKey = (e) => {
-        if(e.keyCode === 13){
-            submitPrompt(e)
+        if (e.keyCode === 13) {
+            submitPrompt(e);
         }
-    }
+    };
 
     async function submitPrompt(event) {
         event.preventDefault();
-        setIsLoading(true)
+        setIsLoading(true);
         const response = await fetch('/api/friend', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ myword: myword, engine:engine }),
+            body: JSON.stringify({ myword: myword, engine: engine }),
         });
         const data = await response.json();
         setGptword(data.gptword);
@@ -56,18 +57,21 @@ function UserInputBox() {
 
     return (
         <div>
-            <form onSubmit={submitPrompt}>
+            <form onSubmit={submitPrompt} className="flex justify-between border-2 w-full">
                 <textarea
-                    className="text-gray-800"
+                    className="text-gray-800 opacity-60 w-4/5 md:w-[400px]"
                     name="myword"
-                    cols="60"
+                    
                     rows="2"
-                    placeholder="say anything"
+                    placeholder="Type Anything"
                     value={myword}
                     onKeyUp={handleEnterKey}
                     onChange={(e) => setMyword(e.target.value)}
                 ></textarea>
-                <button type="submit">send</button>
+                <button className='w-10 text-white mx-2 md:mx-10' type="submit">
+                    
+                    <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
+                </button>
             </form>
         </div>
     );
