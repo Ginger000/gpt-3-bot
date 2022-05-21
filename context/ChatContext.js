@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 const ChatContext = createContext()
 
 export const ChatProvider = ({children}) => {
-  const [conversation, setConversation] = useState([{content:"Hey! How are you!", timestamp: 0, speaker:"gpt", id:uuidv4()}])
+  const [conversation, setConversation] = useState([{content:"Hey! How are you!", timestamp: 0, speaker:"gpt", id:uuidv4(), engine:'text-curie-001'}])
   const [engine, setEngine] = useState('text-curie-001');
   const [isLoading, setIsLoading] = useState(false)
 

@@ -16,6 +16,7 @@ function UserInputBox() {
             speaker: 'gpt',
             content: gptword,
             timestamp: Date.now(),
+            engine:engine
         };
         console.log(isLoading);
         setTimeout(() => {
@@ -49,6 +50,7 @@ function UserInputBox() {
                 speaker: 'me',
                 content: myword,
                 timestamp: Date.now(),
+                engine:""
             };
             addConversation(newWord);
         }
