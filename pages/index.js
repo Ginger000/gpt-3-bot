@@ -19,7 +19,7 @@ export default function Home() {
                         Talk with your AI friend
                     </h1>
 
-                    <NavMobile className="md:hidden" />
+                    
                     <div className="flex">
                         <div>
                             <Chatbox />
@@ -29,6 +29,7 @@ export default function Home() {
                             <OptionBox />
                         </div>
                     </div>
+                    <NavMobile className="md:hidden" />
                 </main>
             </div>
         </ChatProvider>
