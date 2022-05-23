@@ -16,7 +16,7 @@ function UserInputBox() {
             speaker: 'gpt',
             content: gptword,
             timestamp: Date.now(),
-            engine:engine
+            engine: engine,
         };
         console.log(isLoading);
         setTimeout(() => {
@@ -34,44 +34,47 @@ function UserInputBox() {
 
     async function submitPrompt(event) {
         event.preventDefault();
-        setIsLoading(true);
-        const response = await fetch('/api/friend', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ myword: myword, engine: engine }),
-        });
-        const data = await response.json();
-        setGptword(data.gptword);
+        if (myword.trim().length > 0) {
+            setIsLoading(true);
+            const response = await fetch('/api/friend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ myword: myword, engine: engine }),
+            });
+            const data = await response.json();
+            setGptword(data.gptword);
 
-        if (myword.length > 0) {
-            const newWord = {
-                speaker: 'me',
-                content: myword,
-                timestamp: Date.now(),
-                engine:""
-            };
-            addConversation(newWord);
+            if (myword.length > 0) {
+                const newWord = {
+                    speaker: 'me',
+                    content: myword,
+                    timestamp: Date.now(),
+                    engine: '',
+                };
+                addConversation(newWord);
+            }
+            setMyword('');
         }
-        setMyword('');
     }
 
     return (
         <div>
-            <form onSubmit={submitPrompt} className="flex justify-between border-2 w-full">
+            <form
+                onSubmit={submitPrompt}
+                className="flex justify-between border-2 w-full"
+            >
                 <textarea
                     className="text-gray-800 opacity-60 w-4/5 md:w-[400px]"
                     name="myword"
-                    
                     rows="2"
                     placeholder="Type Anything"
                     value={myword}
                     onKeyUp={handleEnterKey}
                     onChange={(e) => setMyword(e.target.value)}
                 ></textarea>
-                <button className='w-10 text-white mx-2 md:mx-10' type="submit">
-                    
+                <button className="w-10 text-white mx-2 md:mx-10" type="submit">
                     <FontAwesomeIcon icon={faPaperPlane}></FontAwesomeIcon>
                 </button>
             </form>

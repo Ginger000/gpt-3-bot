@@ -29,10 +29,12 @@ function TalkItem({conver}) {
         <div
             key={id}
             className={`${speaker === 'gpt' ? 'self-start' : 'self-end'} flex items-start`}
-        >
-            <div className="w-6 ml-4 my-2">
-               <FontAwesomeIcon icon={icons[curEngine]}></FontAwesomeIcon>
-            </div>
+        >   {
+            engine.length !== 0 ? <div className="w-6 ml-4 my-2">
+            <FontAwesomeIcon icon={icons[curEngine]}></FontAwesomeIcon>
+         </div> : ""
+        }
+            
 
             <Bubble>{content}</Bubble>
         </div>
